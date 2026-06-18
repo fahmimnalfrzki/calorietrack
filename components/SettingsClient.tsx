@@ -201,7 +201,7 @@ export default function SettingsClient({ user, isOwner }: Props) {
 
       {/* Logout */}
       <button
-        onClick={() => signOut({ callbackUrl: "/login" })}
+        onClick={() => signOut({ callbackUrl: "/" })}
         className="w-full border border-gray-200 text-gray-600 rounded-2xl py-4 text-base font-medium min-h-[44px] active:bg-gray-50 transition-colors mt-2"
       >
         Keluar
