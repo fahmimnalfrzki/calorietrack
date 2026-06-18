@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export interface NutritionResult {
+  isFood: boolean;
   foodName: string;
   calories: number;
   protein: number;
@@ -67,6 +68,7 @@ Analisis makanan dalam foto ini dan berikan estimasi kandungan nutrisinya.${cont
 
 Berikan respons HANYA dalam format JSON berikut, tanpa teks lain:
 {
+  "isFood": <true kalau foto jelas berisi makanan/minuman yang bisa dimakan, false kalau bukan>,
   "foodName": "nama makanan dalam bahasa Indonesia",
   "calories": <integer kkal>,
   "protein": <gram, satu desimal>,
@@ -78,6 +80,8 @@ Berikan respons HANYA dalam format JSON berikut, tanpa teks lain:
 }
 
 Pedoman:
+- PENTING: kalau foto BUKAN makanan/minuman (mis. orang, pemandangan, benda, dokumen), set "isFood": false dan isi field lain dengan 0/string kosong. JANGAN mengarang nilai gizi.
+- Kalau foto berisi makanan, set "isFood": true dan isi semua nilai.
 - Kalau ada data historis, gunakan sebagai acuan kalibrasi tapi tetap estimasi dari foto
 - Kalau ada gramasi, sesuaikan porsi dengan berat tersebut
 - Kalau ada deskripsi isi piring, prioritaskan deskripsi untuk identifikasi komponen makanan
@@ -107,11 +111,12 @@ Pedoman:
 
       const parsed = JSON.parse(jsonMatch[0]);
       return {
-        foodName: parsed.foodName,
-        calories: Math.round(parsed.calories),
-        protein: parseFloat(parsed.protein),
-        carbs: parseFloat(parsed.carbs),
-        fat: parseFloat(parsed.fat),
+        isFood: parsed.isFood !== false, // default true kalau model tak mengisi
+        foodName: parsed.foodName ?? "",
+        calories: Math.round(parsed.calories) || 0,
+        protein: parseFloat(parsed.protein) || 0,
+        carbs: parseFloat(parsed.carbs) || 0,
+        fat: parseFloat(parsed.fat) || 0,
         proteinSource: parsed.proteinSource ?? "",
         carbsSource: parsed.carbsSource ?? "",
         fatSource: parsed.fatSource ?? "",

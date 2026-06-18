@@ -125,6 +125,17 @@ export async function POST(req: NextRequest) {
       historyEntries.length > 0 ? historyEntries : undefined
     );
 
+    // Gambar bukan makanan: jangan potong kuota, beri tahu user.
+    if (!result.isFood) {
+      return NextResponse.json(
+        {
+          error: "NOT_FOOD",
+          message: "Tidak terdeteksi makanan pada foto. Coba foto makanan/minuman dengan jelas.",
+        },
+        { status: 422 }
+      );
+    }
+
     // Log usage (not for owner)
     if (!isOwner) {
       await getDb().insert(usageLog).values({

@@ -7,6 +7,9 @@ import { accounts, sessions, users, verificationTokens } from "./db/schema";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   // Percayai host dari Vercel (mencegah masalah signin/signout di production)
   trustHost: true,
+  // NextAuth v5 mencari AUTH_SECRET; dukung juga nama lama NEXTAUTH_SECRET agar
+  // tidak MissingSecret di production apa pun nama env var yang diset.
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
   adapter: DrizzleAdapter(getDb(), {
     usersTable: users,
     accountsTable: accounts,
