@@ -5,8 +5,8 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
-  title: "CalTrack",
-  description: "Estimasi kalori dari foto makanan",
+  title: "Catat Kalori",
+  description: "Lacak kalori dan makronutrien cukup dari foto makanan",
 };
 
 export const viewport: Viewport = {

@@ -10,10 +10,10 @@ export default async function LoginPage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
-          <div className="text-5xl mb-4">🍽️</div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">CalTrack</h1>
+          <div className="text-5xl mb-4">🍎</div>
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Catat Kalori</h1>
           <p className="mt-2 text-gray-500 text-base">
-            Estimasi kalori dari foto makanan
+            Lacak kalori dari foto makanan
           </p>
         </div>
 

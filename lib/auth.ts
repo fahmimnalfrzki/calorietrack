@@ -5,6 +5,8 @@ import { getDb } from "./db";
 import { accounts, sessions, users, verificationTokens } from "./db/schema";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  // Percayai host dari Vercel (mencegah masalah signin/signout di production)
+  trustHost: true,
   adapter: DrizzleAdapter(getDb(), {
     usersTable: users,
     accountsTable: accounts,
