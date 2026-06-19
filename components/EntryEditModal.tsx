@@ -83,7 +83,7 @@ export default function EntryEditModal({ entry, onSaved, onDeleted, onClose }: P
   }).format(new Date(data.createdAt));
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 bg-black/50 z-[70] flex items-end sm:items-center justify-center">
       <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-md max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-white px-5 py-4 flex items-center justify-between border-b border-gray-100">
@@ -200,7 +200,10 @@ export default function EntryEditModal({ entry, onSaved, onDeleted, onClose }: P
         )}
 
         {/* Actions */}
-        <div className="sticky bottom-0 bg-white px-5 py-4 flex gap-3 border-t border-gray-100">
+        <div
+          className="sticky bottom-0 bg-white px-5 pt-4 flex gap-3 border-t border-gray-100"
+          style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}
+        >
           {confirmDelete ? (
             <>
               <button
